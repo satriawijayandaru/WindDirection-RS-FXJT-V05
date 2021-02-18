@@ -1,9 +1,22 @@
-void setup() {
-  // put your setup code here, to run once:
+#define hwserial Serial
+#define sensorPin A0
 
+int sensorData;
+
+void setup() {
+  hwserial.begin(115200);
+  delay(100);
+  hwserial.println("Boot Complete");
+  pinMode(sensorPin, INPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  readSensor();
+  delay(100);
+}
 
+void readSensor() {
+  sensorData = analogRead(sensorPin);
+  Serial.print("Sensor Data = ");
+  Serial.println(sensorData);
 }
